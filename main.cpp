@@ -12,6 +12,7 @@
 #include <sstream>
 #include "http.h"
 
+
 const char DOMAIN[]={"www.erepublik.com"};
 
 const std::string LOGIN="lanagul@rainmail.biz";
