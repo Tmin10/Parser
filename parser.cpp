@@ -89,7 +89,7 @@ raw parser::get_food_raw()
     string count = "";
     cout<<endl<<temp_count<<endl;
 
-    for (int i=0; i<temp_count.length(); i++)
+    for (int i=0; i<(int)temp_count.length(); i++)
     {
         if ((int)temp_count[i]>47&&(int)temp_count[i]<58)
             count+=temp_count[i];
@@ -97,7 +97,7 @@ raw parser::get_food_raw()
     string temp_price = html.substr(html.find("stprice")+20, 40);
     //cout<<endl<<temp_price<<endl;
     string price = "";
-    for (int i=0; i<temp_price.length(); i++)
+    for (int i=0; i<(int)temp_price.length(); i++)
     {
         if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
@@ -124,7 +124,7 @@ raw parser::get_weapon_raw()
     string count = "";
     cout<<endl<<temp_count<<endl;
 
-    for (int i=0; i<temp_count.length(); i++)
+    for (int i=0; i<(int)temp_count.length(); i++)
     {
         if ((int)temp_count[i]>47&&(int)temp_count[i]<58)
             count+=temp_count[i];
@@ -132,7 +132,7 @@ raw parser::get_weapon_raw()
     string temp_price = html.substr(html.find("stprice")+20, 40);
     //cout<<endl<<temp_price<<endl;
     string price = "";
-    for (int i=0; i<temp_price.length(); i++)
+    for (int i=0; i<(int)temp_price.length(); i++)
     {
         if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
@@ -158,7 +158,7 @@ production parser::get_weapon()
     string count = "";
     cout<<endl<<temp_count<<endl;
 
-    for (int i=0; i<temp_count.length(); i++)
+    for (int i=0; i<(int)temp_count.length(); i++)
     {
         if ((int)temp_count[i]>47&&(int)temp_count[i]<58)
             count+=temp_count[i];
@@ -166,7 +166,7 @@ production parser::get_weapon()
     string temp_price = html.substr(html.find("stprice")+20, 40);
     //cout<<endl<<temp_price<<endl;
     string price = "";
-    for (int i=0; i<temp_price.length(); i++)
+    for (int i=0; i<(int)temp_price.length(); i++)
     {
         if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
@@ -192,7 +192,7 @@ production parser::get_food()
     string count = "";
     cout<<endl<<temp_count<<endl;
 
-    for (int i=0; i<temp_count.length(); i++)
+    for (int i=0; i<(int)temp_count.length(); i++)
     {
         if ((int)temp_count[i]>47&&(int)temp_count[i]<58)
             count+=temp_count[i];
@@ -200,7 +200,7 @@ production parser::get_food()
     string temp_price = html.substr(html.find("stprice")+20, 40);
     //cout<<endl<<temp_price<<endl;
     string price = "";
-    for (int i=0; i<temp_price.length(); i++)
+    for (int i=0; i<(int)temp_price.length(); i++)
     {
         if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
