@@ -50,7 +50,7 @@ std::string http::get_page(std::string method, const char *url, std::string page
 
 
     //----------------
-    bool debug=false;
+    bool debug=true;
     //----------------
 
     for (int i=0; i<to; i++)

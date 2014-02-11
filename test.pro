@@ -8,11 +8,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     http.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    parser.cpp \
+    market.cpp \
+    raw.cpp \
+    production.cpp
 
 HEADERS  += \
     http.h \
-    mainwindow.h
+    mainwindow.h \
+    parser.h \
+    market.h \
+    raw.h \
+    production.h
 
 
 

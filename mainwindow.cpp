@@ -2,8 +2,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "http.h"
+#include "parser.h"
 
-
+/*
 const char DOMAIN[]={"www.erepublik.com"};
 
 const std::string MAIN_PAGE="en";
@@ -11,11 +12,12 @@ const std::string LOGIN_PAGE="en/login";
 
 const std::string FOOD_RAW_MARKET_PAGE="en/economy/market/41/7/1/citizen/0/price_asc/1";
 const std::string WEAPON_RAW_MARKET_PAGE="en/economy/market/41/12/1/citizen/0/price_asc/1";
-const std::string WEAPON_MARKET_PAGE="en/economy/market/41/2/$q$/citizen/0/price_asc/1";
-const std::string FOOD_MARKET_PAGE="ssen/economy/market/41/1/$q$/citizen/0/price_asc/1";
+const std::string WEAPON_MARKET_PAGE="en/economy/market/41/2/7/citizen/0/price_asc/1";
+const std::string FOOD_MARKET_PAGE="ssen/economy/market/41/1/7/citizen/0/price_asc/1";
 
 std::string get="GET";
 std::string post="POST";
+*/
 
 using namespace std;
 
@@ -38,8 +40,34 @@ void MainWindow::on_pushButton_clicked()
     ui->pushButton->setEnabled(false);
     ui->progressBar->setEnabled(true);
 
+    string login=ui->lineEdit->text().replace("@","%40").toUtf8().constData();
+    string password=ui->lineEdit_2->text().toUtf8().constData();
 
-    //ui->listWidget->addItem(QString::number(1));
+
+    parser *pars = new parser (login, password);
+    if (!pars->auth())
+    {
+        ui->lineEdit->setEnabled(true);
+        ui->lineEdit_2->setEnabled(true);
+        ui->pushButton->setEnabled(true);
+        ui->progressBar->setEnabled(false);
+        QMessageBox Msgbox;
+        Msgbox.setText("Any http error, void answer for request given");
+        Msgbox.exec();
+    }
+    else
+    {
+        ui->listWidget->addItem("Site token: "+QString::fromStdString(pars->get_token()));
+        ui->listWidget->addItem("Cookies: "+QString::fromStdString(pars->get_cookies()));
+
+        ui->progressBar->setValue(28);
+        cout<<pars->get_food_raw().print()<<endl;
+    }
+
+
+
+
+    /*
     string s="\r\n"
                      "User-Agent: Mozilla/5.0\r\n"
                      "Accept: text/html\r\n"
@@ -83,11 +111,12 @@ void MainWindow::on_pushButton_clicked()
     ui->progressBar->setValue(12);
 
     //Get markets pages
-    html=parser->get_page(get, DOMAIN, FOOD_RAW_MARKET_PAGE, s+"Cookie: "+cookies+" \r\n\r\n", 158, 179);
+    html=parser->get_page(get, DOMAIN, FOOD_RAW_MARKET_PAGE, s+"Cookie: "+cookies+" \r\n\r\n", 153, 161);
     cout<<endl<<html<<endl;
 
-    string temp_count = html.substr(html.find("m_stock"), 40);
+    string temp_count = html.substr(html.find("m_stock"), 70);
     string count = "";
+    cout<<endl<<temp_count<<endl;
 
     for (int i=0; i<temp_count.length(); i++)
     {
@@ -95,7 +124,7 @@ void MainWindow::on_pushButton_clicked()
             count+=temp_count[i];
     }
     string temp_price = html.substr(html.find("stprice")+20, 40);
-    cout<<endl<<temp_price<<endl;
+    //cout<<endl<<temp_price<<endl;
     string price = "";
     for (int i=0; i<temp_price.length(); i++)
     {
@@ -105,6 +134,6 @@ void MainWindow::on_pushButton_clicked()
 
     cout<<count<<" "<<price<<endl;
 
-
+    */
 }
 
