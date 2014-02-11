@@ -85,9 +85,26 @@ void MainWindow::on_pushButton_clicked()
     //Get markets pages
     html=parser->get_page(get, DOMAIN, FOOD_RAW_MARKET_PAGE, s+"Cookie: "+cookies+" \r\n\r\n", 158, 179);
     cout<<endl<<html<<endl;
-    string count = html.substr(html.find_first_of("m_stock"), 30);
-    for (int i=0; i<count.length(); i++)
-        if (count[i]==)
+
+    string temp_count = html.substr(html.find("m_stock"), 40);
+    string count = "";
+
+    for (int i=0; i<temp_count.length(); i++)
+    {
+        if ((int)temp_count[i]>47&&(int)temp_count[i]<58)
+            count+=temp_count[i];
+    }
+    string temp_price = html.substr(html.find("stprice")+20, 40);
+    cout<<endl<<temp_price<<endl;
+    string price = "";
+    for (int i=0; i<temp_price.length(); i++)
+    {
+        if ((int)temp_price[i]>47&&(int)temp_price[i]<58||(int)temp_price[i]==(int)'.')
+            price+=temp_price[i];
+    }
+
+    cout<<count<<" "<<price<<endl;
 
 
 }
+

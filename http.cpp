@@ -67,8 +67,10 @@ std::string http::get_page(std::string method, const char *url, std::string page
            //std::cout<<"\r\n-----"<<i<<"-----\r\n"<<buf<<"\r\n---\r\n";
            if (debug)
                out+="----- page -----\r\n";
-           for (int j=0; j<500; j++)
-               out+=buf[j];
+           buf[500]=NULL;
+           out+=buf;
+           //for (int j=0; j<500; j++)
+           //    out+=buf[j];
            if (debug)
             out+="\r\n----- page -----\r\n";
            //std::cout<<j<<": "<<buf[j]<<std::endl;
