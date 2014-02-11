@@ -9,7 +9,7 @@ const std::string LOGIN_PAGE="en/login";
 const std::string FOOD_RAW_MARKET_PAGE="en/economy/market/41/7/1/citizen/0/price_asc/1";
 const std::string WEAPON_RAW_MARKET_PAGE="en/economy/market/41/12/1/citizen/0/price_asc/1";
 const std::string WEAPON_MARKET_PAGE="en/economy/market/41/2/7/citizen/0/price_asc/1";
-const std::string FOOD_MARKET_PAGE="ssen/economy/market/41/1/7/citizen/0/price_asc/1";
+const std::string FOOD_MARKET_PAGE="en/economy/market/41/1/7/citizen/0/price_asc/1";
 
 std::string get="GET";
 std::string post="POST";
@@ -99,11 +99,13 @@ raw parser::get_food_raw()
     string price = "";
     for (int i=0; i<temp_price.length(); i++)
     {
-        if ((int)temp_price[i]>47&&(int)temp_price[i]<58||(int)temp_price[i]==(int)'.')
+        if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
     }
 
     cout<<count<<" "<<price<<endl;
+
+    delete parser;
 
     raw *out = new raw("Grain", count, price);
     return *out;
@@ -132,11 +134,13 @@ raw parser::get_weapon_raw()
     string price = "";
     for (int i=0; i<temp_price.length(); i++)
     {
-        if ((int)temp_price[i]>47&&(int)temp_price[i]<58||(int)temp_price[i]==(int)'.')
+        if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
     }
 
     cout<<count<<" "<<price<<endl;
+
+    delete parser;
 
     raw *out = new raw("Iron", count, price);
     return *out;
@@ -164,17 +168,19 @@ production parser::get_weapon()
     string price = "";
     for (int i=0; i<temp_price.length(); i++)
     {
-        if ((int)temp_price[i]>47&&(int)temp_price[i]<58||(int)temp_price[i]==(int)'.')
+        if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
     }
 
     cout<<count<<" "<<price<<endl;
 
+    delete parser;
+
     production *out = new production("Weapon", count, price);
     return *out;
 }
 
-production parser::get_weapon()
+production parser::get_food()
 {
     //Get markets pages
     http *parser = new http();
@@ -196,14 +202,33 @@ production parser::get_weapon()
     string price = "";
     for (int i=0; i<temp_price.length(); i++)
     {
-        if ((int)temp_price[i]>47&&(int)temp_price[i]<58||(int)temp_price[i]==(int)'.')
+        if (((int)temp_price[i]>47&&(int)temp_price[i]<58)||(int)temp_price[i]==(int)'.')
             price+=temp_price[i];
     }
 
     cout<<count<<" "<<price<<endl;
 
+    delete parser;
+
     production *out = new production("Food", count, price);
     return *out;
 }
 
+bool parser::send_data(raw grain, raw iron, production food, production weapon)
+{
+    http *parser = new http();
+    string query = "c[]="+grain.get_count()+"&p[]="+grain.get_price();
+    query += "&c[]="+iron.get_count()+"&p[]="+iron.get_price();
+    query += "&c[]="+food.get_count()+"&p[]="+food.get_price();
+    query += "&c[]="+weapon.get_count()+"&p[]="+weapon.get_price();
+    string html=parser->get_page(post, "www.tmin10.ru", "parser_form", s+"Content-Type: application/x-www-form-urlencoded\r\n\r\n"+query, 0, 1);
+    delete parser;
+    if (html.length()==0)
+    {
+        cout<<"Any http error, void answer for request given"<<std::endl;
+        return false;
+    }
+    else
+        return true;
+}
 

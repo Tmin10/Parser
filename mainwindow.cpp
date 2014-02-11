@@ -61,7 +61,28 @@ void MainWindow::on_pushButton_clicked()
         ui->listWidget->addItem("Cookies: "+QString::fromStdString(pars->get_cookies()));
 
         ui->progressBar->setValue(28);
-        cout<<pars->get_food_raw().print()<<endl;
+
+        raw food_raw = pars->get_food_raw();
+        ui->listWidget->addItem(QString::fromStdString(food_raw.print()));
+        ui->progressBar->setValue(42);
+
+        raw weapon_raw = pars->get_weapon_raw();
+        ui->listWidget->addItem(QString::fromStdString(weapon_raw.print()));
+        ui->progressBar->setValue(56);
+
+        production food = pars->get_food();
+        ui->listWidget->addItem(QString::fromStdString(food.print()));
+        ui->progressBar->setValue(70);
+
+        production weapon = pars->get_weapon();
+        ui->listWidget->addItem(QString::fromStdString(weapon.print()));
+        ui->progressBar->setValue(84);
+
+        if (pars->send_data(food_raw, weapon_raw, food, weapon))
+            ui->listWidget->addItem("Data loaded to remote server");
+        else
+            ui->listWidget->addItem("Sending data error");
+        ui->progressBar->setValue(100);
     }
 
 

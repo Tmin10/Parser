@@ -21,6 +21,7 @@ public:
     std::string get_token();
     std::string get_cookies();
 
+    bool send_data(raw grain, raw iron, production food, production weapon);
 
 
 private:
