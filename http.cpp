@@ -44,18 +44,35 @@ std::string http::get_page(std::string method, const char *url, std::string page
     if(connect(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0)
     {
        std::cerr<<"connect error"<<std::endl;
-        exit(2);
+       exit(2);
     }
     send(sock, message, sizeof(message), 0);
 
+
+    //----------------
+    bool debug=false;
+    //----------------
+
     for (int i=0; i<to; i++)
     {
-        buf[0]=NULL;
-        recv(sock, buf, sizeof(buf), 0);
+        //for (int j=0; j<500; j++)
+        //    buf[j]=NULL;
+        /*std::cout<<"read "<<*/recv(sock, buf, sizeof(buf), 0);//<<" bytes"<<std::endl;
 
         if (i>=from)
         {
-           out+=buf;
+           //outs.str("");
+           //outs<<i;
+           //out+=buf;
+           //std::cout<<"\r\n-----"<<i<<"-----\r\n"<<buf<<"\r\n---\r\n";
+           if (debug)
+               out+="----- page -----\r\n";
+           for (int j=0; j<500; j++)
+               out+=buf[j];
+           if (debug)
+            out+="\r\n----- page -----\r\n";
+           //std::cout<<j<<": "<<buf[j]<<std::endl;
+
         }
     }
 

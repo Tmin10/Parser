@@ -1,4 +1,24 @@
-#include <cstring>
+#include "mainwindow.h"
+#include <QApplication>
+#include <iostream>
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    std::cout<<"iu";
+    return a.exec();
+}
+
+
+
+
+
+
+
+
+/*#include <cstring>
 #include <stdlib.h>
 #include <iostream>
 #include <sys/types.h>
@@ -24,7 +44,7 @@ const std::string LOGIN_PAGE="en/login";
 const std::string FOOD_RAW_MARKET_PAGE="en/economy/market/41/7/1/citizen/0/price_asc/1";
 const std::string WEAPON_RAW_MARKET_PAGE="en/economy/market/41/12/1/citizen/0/price_asc/1";
 const std::string WEAPON_MARKET_PAGE="en/economy/market/41/2/$q$/citizen/0/price_asc/1";
-const std::string FOOD_MARKET_PAGE="en/economy/market/41/1/$q$/citizen/0/price_asc/1";
+const std::string FOOD_MARKET_PAGE="ssen/economy/market/41/1/$q$/citizen/0/price_asc/1";
 
 
 using namespace std;
@@ -64,5 +84,7 @@ int main(int argc, char* argv[])
 
 
 
+
     return (EXIT_SUCCESS);
 }
+*/
